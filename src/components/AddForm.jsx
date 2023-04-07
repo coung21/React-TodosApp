@@ -1,16 +1,22 @@
 import React from 'react'
 import {TiTick} from 'react-icons/ti'
 import {MdCancel} from 'react-icons/md'
+import { useDispatch } from 'react-redux';
+import { taskUiAction } from '../store/taskUI-reducer';
 
 
-function AddForm() {
+function AddForm(props) {
+  const dispatch = useDispatch()
+  function finishFormHandler(){
+    dispatch(taskUiAction.AddForm(false))
+  }
   return (
-    <form className='mb-4 flex justify-between items-center'>
+    <form className={`mb-4 flex justify-between items-center ${props.className}`}>
       <div>
         <button className=''>
           <TiTick size={25} style={{ color: 'green' }} />
         </button>
-        <button className=''>
+        <button onClick={finishFormHandler}>
           <MdCancel size={25} style={{ color: 'red' }} />
         </button>
       </div>
