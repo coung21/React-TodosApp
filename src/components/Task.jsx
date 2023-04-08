@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import '../utils/animations/strike.css';
 import { CSSTransition } from 'react-transition-group';
+import { taskAction } from '../store/tasks-reducer';
+import { useDispatch } from 'react-redux';
 
-function Task() {
+function Task(props) {
+  const {id , name, time} = props
+  const dispatch = useDispatch()
   const [isChecked, setIsChecked] = useState(false);
-
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
+    setTimeout(()=> {
+     dispatch(taskAction.removeTask(id)); 
+    }, 600)
+    
   };
 
   return (
@@ -21,7 +28,7 @@ function Task() {
           <input
             className='form-checkbox h-6 w-6 rounded cursor-pointer'
             type='checkbox'
-            onChange={setIsChecked}
+            onChange={handleCheckboxChange}
             checked={isChecked}
           />
           <label
@@ -29,10 +36,10 @@ function Task() {
               isChecked && 'strike'
             }`}
           >
-            Morning walk
+            {name}
           </label>
         </div>
-        <p className='text-sm font-roboto text-[#646469] opacity-75'>7:00pm</p>
+        <p className='text-sm font-roboto text-[#646469] opacity-75'>{time}</p>
       </li>
     </CSSTransition>
   );

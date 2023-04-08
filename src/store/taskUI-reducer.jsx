@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initial_State = {
   isAddingForm: false,
-  isFinished: false
 }
 
 const taskUiSlice = createSlice({
@@ -12,9 +11,6 @@ const taskUiSlice = createSlice({
     AddForm(state, action){
       state.isAddingForm = action.payload
     },
-    finishForm(state){
-      state.isFinished = !state.isFinished
-    }
   }
 })
 
