@@ -1,27 +1,42 @@
-import { createSlice  } from '@reduxjs/toolkit';
-
-
-
+import { createSlice } from '@reduxjs/toolkit';
 
 const initial_state = {
-  tasksList : [],
-  numberOfTasks : 0
-}
+  localTasks: {
+    tasksList: [],
+    numberOfTasks: 0,
+  },
+  remoteTasks: {
+    tasksList: [],
+    numberOfTasks: 0,
+  },
+};
+
 
 const taskSlice = createSlice({
-  name:'tasks',
+  name: 'tasks',
   initialState: initial_state,
   reducers: {
-    addTask(state, action){
-      state.tasksList.unshift(action.payload)
-      state.numberOfTasks += 1
+    querytasks(state, action) {
+      state.remoteTasks = action.payload;
     },
-    removeTask(state, action){
-      state.tasksList = state.tasksList.filter(task => task.id !== action.payload)
-      state.numberOfTasks -= 1
-    }
-  }
-})
+    addTask(state, action) {
+      const updatedTasksList = [action.payload, ...state.localTasks.tasksList];
+      state.localTasks = {
+        tasksList: updatedTasksList,
+        numberOfTasks: updatedTasksList.length,
+      };
+    },
 
-export const taskAction = taskSlice.actions
-export default taskSlice.reducer
+    removeTask(state, action) {
+      state.localTasks.tasksList = state.localTasks.tasksList.filter(
+        (task) => task.id !== action.payload
+      );
+      state.localTasks.numberOfTasks -= 1;
+    },
+  },
+});
+
+
+
+export const taskAction = taskSlice.actions;
+export default taskSlice.reducer;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../utils/animations/strike.css';
 import { CSSTransition } from 'react-transition-group';
 import { taskAction } from '../store/tasks-reducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 function Task(props) {
   const {id , name, time} = props
@@ -13,7 +13,6 @@ function Task(props) {
     setTimeout(()=> {
      dispatch(taskAction.removeTask(id)); 
     }, 600)
-    
   };
 
   return (

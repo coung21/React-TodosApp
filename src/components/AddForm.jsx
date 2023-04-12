@@ -53,6 +53,7 @@ function AddForm(props) {
         value={enteredValue}
         onChange={enterValueHandler}
         type='text'
+        autoFocus
         className='border-2 border-gray-300 font-medium font-roboto bg-gray-50 focus:outline-indigo-600 focus:bg-[#ebebeb] rounded-md min-w-[20rem] h-8 indent-4'
       />
     </form>

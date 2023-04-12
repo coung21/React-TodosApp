@@ -6,7 +6,9 @@ import { taskUiAction } from '../store/taskUI-reducer';
 
 function Header(props) {
   const dispatch = useDispatch();
-  const numberOfTasks = useSelector(state => state.tasks.numberOfTasks)
+  const numberOfTasks = useSelector(
+    (state) => state.tasks.remoteTasks.numberOfTasks
+  );
   function onAddForm() {
     dispatch(taskUiAction.AddForm(true));
   }
